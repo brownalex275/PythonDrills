@@ -2,8 +2,10 @@
 import shutil
 import os
 
-folder = '/Users/nygfan72/Desktop/Folder A/'
-dest = '/Users/nygfan72/Desktop/Folder B'
+user = os.path.expanduser('~') #get user's home folder
+
+folder = user + '/Desktop/Folder A/'
+dest = user + '/Desktop/Folder B'
 
 files = os.path.dirname(folder) #get directory name of files in folder A
 folders = os.listdir(folder) #get list of items in folder A
