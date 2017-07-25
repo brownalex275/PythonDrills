@@ -12,16 +12,17 @@ def create_db(self):
     conn = sqlite3.connect('lastrun.db') #create new database named lastrun
     with conn:
         c = conn.cursor()
-        c.execute('DROP TABLE times;') #drop table if it already exists
         c.execute('CREATE TABLE IF NOT EXISTS times(datestamp TEXT);') #create new table that will hold times in lastrun.db
         c.execute('INSERT INTO times(datestamp) VALUES(datetime(CURRENT_TIMESTAMP,"localtime"));')
+        c.execute('SELECT datestamp FROM times WHERE ROWID = (SELECT MAX(ROWID) FROM times);')
+        start = c.fetchone()
         conn.commit()
     conn.close()
     self.entry_last.config(state='!disabled')
-    self.entry_last.insert(0, 'N/A')
+    self.entry_last.insert(0, start[0])
     self.entry_last.config(state='disabled')
     self.entry_status.config(state='!disabled')
-    self.entry_status.insert(0, 'Waiting for initial run...')
+    self.entry_status.insert(0, 'Press start')
     self.entry_status.config(state='disabled')
 
 def last_24(self,src,destin):
