@@ -15,8 +15,8 @@ while stop:
             path = os.path.join(root,item)
             st = os.stat(path)
             mtime = dt.datetime.fromtimestamp(st.st_mtime) #grab the modified times for each files
-            if now - mtime < limit:
+            if item.endswith(".txt") and now - mtime < limit:
                 print('%s modified %s' % (path, mtime))
                 shutil.copy(path, dest) #copy files that were modified less than 24 hours ago
     print 'All modified files were successfully copied.'
-    time.sleep(300) #waits 5 minutes before checking again
+    time.sleep(300) #waits 5 min before checking again
