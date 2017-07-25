@@ -42,7 +42,7 @@ def load_gui(self):
 
 
     self.text_results = Text(self.frame_main, width=30, height=20,  yscrollcommand = self.scrollbar.set) #create text widget to store results from shell
-    self.text_results.config(state='normal',wrap=WORD)
+    self.text_results.config(state='disabled',wrap=WORD)
     self.text_results.grid(row=2, column=1, rowspan=3)
 
     self.scrollbar.config(command=self.text_results.yview)

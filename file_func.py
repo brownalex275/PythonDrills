@@ -27,13 +27,17 @@ def last_24(self,stop,src,destin):
                     shutil.copy(path, dest) #copy files that were modified less than 24 hours ago
         print('All modified files were successfully copied.',file=buffer)
         output = buffer.getvalue()
+        self.text_results.config(state='normal')
         self.text_results.delete('1.0',END)
         self.text_results.insert(END,output)
+        self.text_results.config(state='disabled')
         self.after(300000,lambda: last_24(self,stop=True,src=source,destin =dest)) #waits 5 minutes before checking again
     else: print('Program stopped.',file=buffer)
     output = buffer.getvalue() #saves file contents to a variable
+    self.text_results.config(state='normal')
     self.text_results.delete('1.0', END)
     self.text_results.insert(END, output) #output file contents to the text widget
+    self.text_results.config(state='disabled')
 
 def ask_quit(self): #asks user if they want to exit if red x is clicked on mac
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
