@@ -45,12 +45,12 @@ def ask_quit(self): #asks user if they want to exit if red x is clicked on mac
         self.master.destroy()
         os._exit(0)
 
-def choose_mod(self): #lets user choose which file to watch for modified files
+def choose_mod(self): #lets user choose which folder to watch for modified files in
     filename = filedialog.askdirectory()
     self.entry_modified.delete(0,END)
     self.entry_modified.insert(0,filename)
 
-def choose_copy(self): #lets user choose which file to move modified files to
+def choose_copy(self): #lets user choose which folder to move modified files to 
     filename = filedialog.askdirectory()
     self.entry_copied.delete(0,END)
     self.entry_copied.insert(0,filename)
