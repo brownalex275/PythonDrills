@@ -30,16 +30,11 @@ def load_gui(self):
     self.btn_chooseCopy = ttk.Button(self.frame_main, text='Choose File', command=lambda: filedb_func.choose_copy(self))
     self.btn_chooseCopy.grid(row=5, column=0,pady=10)
     self.btn_start = ttk.Button(self.frame_main, text='Start', command=lambda: filedb_func.last_24(self,src=self.entry_modified.get(),destin = self.entry_copied.get()))
-    self.btn_start.grid(row=4, column=1)
+    self.btn_start.grid(row=2, column=1, padx=20)
 
-    ttk.Label(self.frame_main, text="Last time program was run:").grid(row=0, column=1,sticky= 's', pady=10) #create label and entry box showing the last time the program ran
-    self.entry_last = ttk.Entry(self.frame_main, width=20)
-    self.entry_last.config(state='disabled')
-    self.entry_last.grid(row=1, column=1,padx=20, sticky ='n')
 
-    self.entry_status = ttk.Entry(self.frame_main, width=30) #create box to show if program ran successfully
-    self.entry_status.config(state='disabled')
-    self.entry_status.grid(row=3, column=1, padx=20, sticky='n')
+
+
 
     filedb_func.create_db(self)
 

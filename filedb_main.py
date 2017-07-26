@@ -16,7 +16,6 @@ class FTransfer(Frame):
 
 def main():
     root = Tk()
-    root.deiconify()
     style = ttk.Style()
     style.theme_use('clam')
     fTransfer = FTransfer(root)
