@@ -3,6 +3,7 @@ from tkinter import ttk
 import filedb_func
 import filedb_gui
 
+
 class FTransfer(Frame):
     def __init__(self,master):
         Frame.__init__(self)
@@ -15,10 +16,12 @@ class FTransfer(Frame):
 
 def main():
     root = Tk()
+    root.deiconify()
     style = ttk.Style()
     style.theme_use('clam')
     fTransfer = FTransfer(root)
     root.mainloop()
+
 
 
 if __name__ == "__main__": main()

@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 import filedb_func
-import filedb_main
 
 
 def load_gui(self):
@@ -18,10 +17,12 @@ def load_gui(self):
     self.entry_modified.grid(row=1, column=0, sticky='n',padx=20)
 
 
+
     ttk.Label(self.frame_main, text="Where should the files be copied?").grid(row=3, column=0,sticky= 's', pady=10) #create label and entry for folder to copy to
     self.entry_copied = ttk.Entry(self.frame_main, width=20,)
     self.entry_copied.config(state='!disabled')
     self.entry_copied.grid(row=4, column=0,padx=20, sticky ='n')
+
 
 
     self.btn_chooseMod = ttk.Button(self.frame_main, text='Choose File', command=lambda: filedb_func.choose_mod(self)) #create buttons for choosing watch and copy folders
@@ -40,6 +41,5 @@ def load_gui(self):
     self.entry_status.config(state='disabled')
     self.entry_status.grid(row=3, column=1, padx=20, sticky='n')
 
-    filedb_func.choose_mod(self)
-    filedb_func.choose_copy(self)
-    filedb_func.create_db(self) #create the database holding the times
+    filedb_func.create_db(self)
+
