@@ -40,6 +40,6 @@ def load_gui(self):
     self.entry_status.config(state='disabled')
     self.entry_status.grid(row=3, column=1, padx=20, sticky='n')
 
-
-
+    filedb_func.choose_mod(self)
+    filedb_func.choose_copy(self)
     filedb_func.create_db(self) #create the database holding the times
