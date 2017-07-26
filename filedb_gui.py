@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 import filedb_func
+import sqlite3
+import datetime as dt
 
 
 def load_gui(self):
@@ -31,10 +33,16 @@ def load_gui(self):
     self.btn_chooseCopy.grid(row=5, column=0,pady=10)
     self.btn_start = ttk.Button(self.frame_main, text='Start', command=lambda: filedb_func.last_24(self,src=self.entry_modified.get(),destin = self.entry_copied.get()))
     self.btn_start.grid(row=2, column=1, padx=20)
-
-
-
-
-
     filedb_func.create_db(self)
+
+
+
+
+
+
+
+
+
+
+
 

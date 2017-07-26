@@ -15,19 +15,28 @@ def create_db(self):
         c.execute('CREATE TABLE IF NOT EXISTS times(datestamp TEXT);') #create new table that will hold times in lastrun.db
         conn.commit()
     conn.close()
+    insert(self)
 
+def insert(self):
+    conn = sqlite3.connect('lastrun.db')
+    with conn:
+        c = conn.cursor()
+        current = dt.datetime.now()
+        c.execute('INSERT INTO times(datestamp) VALUES(?)', (
+        current.strftime('%Y-%m-%d %H:%M:%S'),))  # insert the current time files were copied
+        conn.commit()
+        c = conn.cursor()
+        c.execute('SELECT datestamp FROM times ORDER BY datestamp DESC')
+        newTime = c.fetchone()[0]
+    c.close()
+    self.label = ttk.Label(self.frame_main, text="Last time files were copied: " + str(newTime))
+    self.label.grid(row=1, column=1, sticky='s')
 
 
 def last_24(self,src,destin):
     dest = destin  # where the copied files will go
     source = src
-    conn = sqlite3.connect('lastrun.db')
-    with conn:
-        c = conn.cursor()
-        current = dt.datetime.now()
-        c.execute('INSERT INTO times(datestamp) VALUES(?)', (current.strftime('%Y-%m-%d %H:%M:%S'),))  # insert the current time the program was ran into the table
-        conn.commit()
-
+    current = dt.datetime.now()
     prevRun = current - dt.timedelta(hours=24)
     for root, dirs, files in os.walk(source): #grab the file locations
         for item in files:
@@ -37,12 +46,8 @@ def last_24(self,src,destin):
             if item.endswith(".txt") and mtime > prevRun: #if a file was modified after the last time the program ran it is copied into the folder
                 print('%s modified %s' % (path, mtime))
                 shutil.copy(path, dest)
-    with conn:
-        c.execute('SELECT datestamp FROM times ORDER BY datestamp DESC')
-        newTime = c.fetchone()[0]
+    insert(self)
 
-    c.close()
-    ttk.Label(self.frame_main, text="Last time files were copied: " + str(newTime)).grid(row=1, column=1, sticky='s')  # create label showing the last time files were copied
 
 
 
