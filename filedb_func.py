@@ -46,7 +46,7 @@ def last_24(self,src,destin):
             if item.endswith(".txt") and mtime > prevRun: #if a file was modified after the last time the program ran it is copied into the folder
                 print('%s modified %s' % (path, mtime))
                 shutil.copy(path, dest)
-    insert(self)
+                insert(self)
 
 
 
